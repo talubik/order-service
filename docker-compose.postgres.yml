@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: talub
+      POSTGRES_PASSWORD: boba
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    command: postgres -c listen_addresses='*'
+    
+    ports: 
+     - "5432:5432"
+
+
+
+
+volumes:
+  postgres_data:
